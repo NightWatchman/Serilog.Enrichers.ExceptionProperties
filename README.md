@@ -17,4 +17,4 @@ Log.Logger = new LoggerConfiguration()
   .CreateLogger();
 ```
 
-Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
+Copyright (c) Eric Rushing 2022 - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
