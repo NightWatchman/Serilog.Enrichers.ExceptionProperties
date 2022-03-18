@@ -1,6 +1,6 @@
 # Serilog.Enrichers.ExceptionProperties
 
-Enriches Serilog events with `Exception` properties when `Exception`s are logged. The included properties are `Message`, `Stacktrace`, and `InnerException.Message`. They are enhanced as `Exception`, `StackTrace`, and `InnerException` properties respectively.
+Enriches Serilog events with `Exception` properties when `Exception`s are logged. The included properties are `Message`, `Stacktrace`, and `InnerException.Message`. They are enhanced as `Exception`, `Stacktrace`, and `InnerException` properties respectively.
 
 To use the enricher, first install the NuGet package:
 
