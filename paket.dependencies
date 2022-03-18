@@ -1,0 +1,6 @@
+storage: none
+framework: auto-detect
+
+source https://api.nuget.org/v3/index.json
+
+nuget Serilog
