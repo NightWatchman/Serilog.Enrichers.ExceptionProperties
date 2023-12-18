@@ -1,6 +1,6 @@
 storage: none
-framework: auto-detect
+framework: net6
 
 source https://api.nuget.org/v3/index.json
 
-nuget Serilog ~> 2
+nuget Serilog >= 2 < 4
