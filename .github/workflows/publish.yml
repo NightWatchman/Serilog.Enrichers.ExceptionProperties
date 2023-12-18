@@ -61,9 +61,9 @@ jobs:
           dotnet paket restore
           dotnet restore
           dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' /p:Version=${{steps.slug.outputs.version}}
-          dotnet paket pack nugets --symbols
+          dotnet paket pack nugets
           
       # Publish the package to Azure Artifacts
       # NuGet repository API key is configured with .NET Core above, and the value provided here is ignored
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key ${{secrets.NUGET_API_KEY}} -s nugets/${{env.PROJECT_NAME}}.${{steps.slug.outputs.version}}.symbols.nupkg
+        run: dotnet nuget push -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} nugets/${{env.PROJECT_NAME}}.${{steps.slug.outputs.version}}.nupkg
