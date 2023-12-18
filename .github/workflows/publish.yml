@@ -1,0 +1,69 @@
+name: Publish Nuget Package
+
+on:
+  push:
+    tags:
+    - 'v[0-9]+\.[0-9]+\.[0-9]+'
+    - 'v[0-9]+\.[0-9]+\.[0-9]+-[a-z0-9]+'
+
+env:
+  PROJECT_NAME: Serilog.Enrichers.ExceptionProperties
+  BUILD_CONFIGURATION: 'Release'
+  DOTNET_VERSION: '7.x.x'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repo
+      - uses: actions/checkout@v4.1.1
+  
+      - name: Get tag
+        id: slug
+        uses: gacts/github-slug@v1.3.0
+      
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4.0.0
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          
+      # Run dotnet build and package
+      - name: dotnet build and test
+        run: |
+          dotnet tool restore
+          dotnet paket restore
+          dotnet restore
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' /p:Version=${{steps.slug.outputs.version}}
+          dotnet test --configuration '${{ env.BUILD_CONFIGURATION }}' /p:Version=${{steps.slug.outputs.version}}
+      
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repo
+      - uses: actions/checkout@v4.1.1
+  
+      - name: Get tag
+        id: slug
+        uses: gacts/github-slug@v1.3.0
+      
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4.0.0
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      # Run dotnet build and package
+      - name: dotnet build and package
+        run: |
+          dotnet tool restore
+          dotnet paket restore
+          dotnet restore
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}' /p:Version=${{steps.slug.outputs.version}}
+          dotnet paket pack nugets --symbols
+          
+      # Publish the package to Azure Artifacts
+      # NuGet repository API key is configured with .NET Core above, and the value provided here is ignored
+      - name: 'dotnet publish'
+        run: dotnet nuget push --api-key ${{NUGET_API_KEY}} nugets/${{env.PROJECT_NAME}}.${{steps.slug.outputs.version}}.symbols.nupkg
