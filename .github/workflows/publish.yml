@@ -66,4 +66,4 @@ jobs:
       # Publish the package to Azure Artifacts
       # NuGet repository API key is configured with .NET Core above, and the value provided here is ignored
       - name: 'dotnet publish'
-        run: dotnet nuget push --api-key ${{secrets.NUGET_API_KEY}} nugets/${{env.PROJECT_NAME}}.${{steps.slug.outputs.version}}.symbols.nupkg
+        run: dotnet nuget push --api-key ${{secrets.NUGET_API_KEY}} -s nugets/${{env.PROJECT_NAME}}.${{steps.slug.outputs.version}}.symbols.nupkg
