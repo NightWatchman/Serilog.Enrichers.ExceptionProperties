@@ -1,1 +1,3 @@
-Serilog
+Serilog.AspNetCore
+group Tests
+TUnit

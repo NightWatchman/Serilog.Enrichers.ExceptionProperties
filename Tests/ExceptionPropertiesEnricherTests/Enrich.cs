@@ -2,19 +2,18 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Serilog.Enrichers.ExceptionProperties;
 using System;
-using Xunit;
 namespace Tests.ExceptionPropertiesEnricherTests;
 
 public class Enrich
 {
-  [Fact]
+  [Test]
   public void EventHasNoException_IsNoOp()
   {
     ExceptionEnricher.Enrich(null, (_, _) =>
       throw new AssertionFailedException("Tried to enrich with no exception"));
   }
 
-  [Fact]
+  [Test]
   public void EventHasException_AddsExceptionMessageProperty()
   {
     var msg = "Test";
@@ -24,7 +23,7 @@ public class Enrich
     });
   }
 
-  [Fact]
+  [Test]
   public void EventExceptionHasNoStacktrace_DoesNotAddStacktrace()
   {
     ExpectNotToHaveBeenCalledWith("Stacktrace", add =>
@@ -33,7 +32,7 @@ public class Enrich
     });
   }
 
-  [Fact]
+  [Test]
   public void EventHasExceptionWithStacktrace_AddsExceptionStacktraceProperty()
   {
     try
@@ -49,7 +48,7 @@ public class Enrich
     }
   }
 
-  [Fact]
+  [Test]
   public void EventHasInnerException_AddsInnerExceptionMessageProperty()
   {
     var msg = "Innie";

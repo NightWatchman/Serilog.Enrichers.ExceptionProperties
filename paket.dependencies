@@ -1,6 +1,16 @@
 storage: none
-framework: net6
+framework: net8
 
 source https://api.nuget.org/v3/index.json
 
-nuget Serilog >= 2 < 4
+nuget Serilog.AspNetCore
+
+group Tests
+storage: none
+framework: net8
+
+source https://api.nuget.org/v3/index.json
+
+nuget FluentAssertions ~> 7
+nuget Moq ~> 4
+nuget TUnit
