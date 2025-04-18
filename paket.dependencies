@@ -12,5 +12,4 @@ framework: net8
 source https://api.nuget.org/v3/index.json
 
 nuget FluentAssertions ~> 7
-nuget Moq ~> 4
 nuget TUnit

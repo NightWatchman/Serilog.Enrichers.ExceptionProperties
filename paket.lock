@@ -77,8 +77,6 @@ STORAGE: NONE
 RESTRICTION: == net8.0
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    Castle.Core (5.1.1)
-      System.Diagnostics.EventLog (>= 6.0)
     EnumerableAsyncProcessor (1.4)
       Microsoft.Bcl.AsyncInterfaces (>= 8.0)
       System.Collections.Immutable (>= 8.0)
@@ -90,8 +88,6 @@ NUGET
     Microsoft.Testing.Platform (1.4.3)
     Microsoft.Testing.Platform.MSBuild (1.4.3)
       Microsoft.Testing.Platform (>= 1.4.3)
-    Moq (4.20.72)
-      Castle.Core (>= 5.1.1)
     System.Collections.Immutable (9.0)
     System.Configuration.ConfigurationManager (9.0)
       System.Diagnostics.EventLog (>= 9.0)
